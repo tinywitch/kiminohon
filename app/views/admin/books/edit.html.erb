@@ -1,0 +1,117 @@
+
+<div class="x_panel">
+    <div class="x_title">
+        <h2><%= @book.title %></h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content" id="book_content">
+        <!-- content starts here -->
+        <%= form_for [:admin, @book], html:{'class' => '', 'data-parsley-validate' => ''} do |f| %>
+	    	<div class="row">
+	    		<div class="col-sm-3">
+		    		<div class="form-group img_preview">
+			    		<label for="book_img">Bookjacket</label>
+			    		<div class="img">
+					        <img src="<%= @book.img_path.url.nil? ? '/img/demo.png' : @book.img_path.url %>" class="full_width book_img img-thumbnail">
+				        	<button type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i></button>
+			        	</div>
+				    </div>
+		        </div>
+	    		<div class="col-sm-9">
+	    			<div class="form-group">
+					    <label for="book_title">Title</label>
+					    <%= f.text_field :title, class: 'form-control', placeholder: 'Title', required: 'required' %>
+					</div>
+	    			<div class="form-group">
+					    <label for="book_author">Athor</label>
+					    <%= f.text_field :author, class: 'form-control', placeholder: 'Author', required: 'required' %>
+					</div>	
+	    			<div class="form-group">
+	    				<div class="row">
+		    				<div class="col-sm-6">
+							    <label for="book_author">Categories</label>
+						        <select class="form-control select2 select2-hidden-accessible" name="categories[]" multiple data-placeholder="Select category" style="width: 100%;" tabindex="-1" aria-hidden="true">
+						          	<% @categories.each do |category| %>
+							            <option 
+							              value="<%= category.id %>"
+							              <% @book.categories.ids.each do |category_selected| %>
+							                <% if category_selected == category.id %>
+							                  selected="selected"
+							                <% end %>
+							              <% end %>
+							            >
+							              <%= category.category %>
+							            </option>
+							          <% end %>
+						        </select>
+					    	</div>
+		    				<div class="col-sm-6">
+							    <label for="book_author">Tags</label>
+							    <select class="form-control select2 select2-hidden-accessible" name="tags[]" multiple data-placeholder="Select tag" style="width: 100%;" tabindex="-1" aria-hidden="true">
+						          	<% @tags.each do |tag| %>
+							            <option
+							              value="<%= tag.id %>"
+							              <% @book.tags.ids.each do |tag_selected| %>
+							                <% if tag_selected == tag.id%>
+							                  selected="selected"
+							                <% end %>
+							              <% end %>  
+							            >
+							              <%= tag.tag_name %>
+							            </option>
+							        <% end %>
+						        </select>
+					    	</div>
+	    				</div>
+					</div>
+	    			<div class="form-group">
+					    <label for="book_description">Description</label>
+					    <%= f.text_area :description, class: 'form-control', placeholder: 'Description', rows: '8', required: 'required', spellcheck: 'false' %>
+					</div>
+	    			<div class="form-group hide">
+					    <label for="book_img">Bookjacket</label>
+					    <%= f.file_field :img_path, accept: 'image/*', id: 'book_img_path'%>
+					</div>
+	    			<div class="form-group">
+	    				<button type="submit" class="btn btn-success">Update</button>
+	    				<a type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target=".delete_comfirm"><i class="fa fa-trash"></i> Delete</a>
+					</div>
+	    		</div>
+	    	</div>
+		<% end %>
+        <!-- content ends here -->
+    </div>
+</div>
+<!-- MODAL DELETE CONFIRM -->
+<div class="modal fade delete_comfirm" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel2">Are you sure delete this?</h4>
+      </div>
+      <div class="modal-body text-center">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <a href="<%= admin_book_path(@book.id) %>" type="button" class="btn btn-success" data-method="delete">Yes, I'm sure</a>
+      </div>
+
+    </div>
+  </div>
+</div><!-- END MODAL -->
+<% content_for :add_js do %>
+	<script type="text/javascript">
+	    $(document).ready(function () {
+	    	$('.img_preview div.img').click(function(){
+	    		$('#book_img_path').click()
+	    	})
+
+	    })
+	</script>
+<% end %>
+
+<% extends_layout "admin/books/master" %>

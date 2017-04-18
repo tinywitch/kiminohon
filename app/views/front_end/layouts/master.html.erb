@@ -1,0 +1,56 @@
+
+<% content_for :add_css do %>
+	<%= stylesheet_link_tag 'nprogress' %>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<style type="text/css">
+		.tt-dropdown-menu {
+			border: 1px solid #ddd;
+			width: calc(100% + 5px);
+			background-color: #fff;
+			border-radius: 0 0 4px 4px;
+			border-top: none;
+		}
+		.tt-dropdown-menu p{
+			margin: 0;
+		}
+		.tt-suggestion{
+			padding: 5px 8px;
+			background-color: #f4fcff;
+		}
+		.tt-suggestion:hover{
+			background-color: #05b2e9;
+			color: #fff
+		}
+	</style>
+<% end %>
+
+<% content_for :content do %>
+
+	<%= render 'front_end/header' %>
+
+	<section class="container">
+		<div class="row">
+			<%= yield :front_end_main %>
+		</div>
+	</section>
+
+	<%= render 'front_end/footer' %>
+
+<% end %>
+
+<% content_for :add_js do %>
+	<%= javascript_include_tag 'nprogress'%>
+	<script type="text/javascript" src="/js/front_end.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.9.3/typeahead.min.js"></script>
+	<script type="text/javascript">
+		$('#book_search').typeahead({
+			highlight: true,
+			classNames: {
+			    input: 'Typeahead-input',
+			    hint: 'Typeahead-hint',
+			    selectable: 'Typeahead-selectable'
+			},
+		    remote: "/book/autocomplete?query=%QUERY"
+		})
+	</script>
+<% end %>

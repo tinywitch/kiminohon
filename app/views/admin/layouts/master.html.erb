@@ -1,0 +1,40 @@
+
+<% content_for :add_css do %>
+	<%= stylesheet_link_tag 'dataTables.bootstrap.min' %>
+	<%= stylesheet_link_tag 'nprogress' %>
+	<%= stylesheet_link_tag 'select2.min' %>
+	<%= stylesheet_link_tag 'back_end' %>
+	<%= stylesheet_link_tag 'pnotify' %>
+	<%= stylesheet_link_tag 'pnotify.buttons' %>
+<% end %>
+
+<% provide(:body_class, "nav-md") %>
+
+<% content_for :content do %>
+	<div class="container body">
+		<div class="main_container">
+			<%= render 'admin/layouts/sidebar' %>
+
+			<%= render 'admin/layouts/top_nav' %>
+
+			<%= yield :back_end_main %>
+
+			<%= render 'admin/layouts/footer' %>
+		</div>
+	</div>
+<% end %>
+
+<% content_for :add_js do %>
+	<%= javascript_include_tag 'back_end', "data-turbolinks-track" => true %>
+	<%= javascript_include_tag 'jquery.dataTables.min'%>
+	<%= javascript_include_tag 'dataTables.bootstrap.min'%>
+	<%= javascript_include_tag 'parsley.min'%>
+	<%= javascript_include_tag 'select2.min'%>
+	<%= javascript_include_tag 'nprogress'%>
+	<%= javascript_include_tag 'pnotify'%>
+	<%= javascript_include_tag 'pnotify.buttons'%>
+	<%= javascript_include_tag 'morris.min'%>
+	<%= javascript_include_tag 'raphael.min'%>
+	<%= javascript_include_tag 'moment.min'%>
+	<%= javascript_include_tag 'daterangepicker'%>
+<% end %>

@@ -1,0 +1,30 @@
+<% provide(:title, "Tiki | Home") %>
+
+<% content_for :add_css do %>
+	<!-- <link rel="stylesheet" type="text/css" href="/css/swiper.min.css"> -->
+<% end %>
+
+<% content_for :front_end_main do %>
+	<%= render 'front_end/menu' %>
+	<div class="col-sm-9" id="list_books_main_content">
+	    <div class="row">
+	    	<div class="col-sm-12 row_title_container">
+	    		<div class="row_title">
+		    		<h3 class="pull-left"><%= @category %></h3>
+		    		<div class="clearfix"></div>
+	    		</div>
+	    	</div>
+	    	<% @books.each do |book| %>
+		    	<div class="col-sm-3">
+		    		<a href="<%= book_path(book.slug) %>">
+			    		<img src="<%= book.img_path.url %>" class="full_width">
+			    		<h5><%= book.title %></h5>
+			    		<h5><%= book.author %></h5>
+		    		</a>
+		    	</div>
+	    	<% end %>
+	    </div>
+	</div>
+<% end %>
+
+<% extends_layout "front_end/layouts/master" %>

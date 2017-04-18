@@ -1,0 +1,50 @@
+<%= form_for [:admin, @post], html:{:class => "form-horizontal form-label-left", 'data-parsley-validate' => ''} do |f| %>
+
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">Title <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= f.text_field :title, class: "form-control col-md-7 col-xs-12", required: "required" %>
+    </div>
+  </div>
+<!--   <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">Link video <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="text" class="form-control col-md-7 col-xs-12" name="link_video" required="required" placeholder="Eg. https://www.youtube.com/watch?v=example" />
+    </div>
+  </div> -->
+  <div class="form-group">
+    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= f.text_area :description, class: "form-control col-md-7 col-xs-12" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">Categories</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <select class="form-control select2 select2-hidden-accessible" name="categories[]" multiple data-placeholder="Select category" style="width: 100%;" tabindex="-1" aria-hidden="true">
+          <% @categories.each do |category| %>
+            <option value="<%= category.id %>"><%= category.category %></option>
+          <% end %>
+        </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">Tags</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <select class="form-control select2 select2-hidden-accessible" name="tags[]" multiple data-placeholder="Select tag" style="width: 100%;" tabindex="-1" aria-hidden="true">
+          <% @tags.each do |tag| %>
+            <option value="<%= tag.id %>"><%= tag.tag_name %></option>
+          <% end %>
+        </select>
+    </div>
+  </div>
+  <div class="ln_solid"></div>
+  <div class="form-group">
+    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </div>
+
+<% end %>

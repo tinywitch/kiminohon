@@ -1,0 +1,83 @@
+<% provide(:title, @book.title) %>
+
+<% content_for :add_css do %>
+	<!-- <link rel="stylesheet" type="text/css" href="/css/swiper.min.css"> -->
+<% end %>
+
+<% content_for :front_end_main do %>
+	<div class="col-sm-12" id="show_book_main_content">
+	    <div class="row">
+	    	<div class="col-sm-5 book_img text-center">
+	    		<img src="<%= @book.img_path.url %>" class="full_width">
+	    	</div>
+	    	<div class="col-sm-7">
+	    		<h3 class="text-capitalize"><%= @book.title %></h3>
+	    		<p>Tác giả : <strong class="text-primary text-capitalize"><%= @book.author %></strong></p>
+	    		<p class="list_categories">Chuyên mục<strong class="text-primary">
+		    		<% @categories.each do |category| %>
+		    			<a href="<%= category_path(category.slug) %>"><%= category.category %></a>
+		    		<% end %>
+	    		</strong></p>
+	    		<% unless @book.average("quality").nil? %>
+					Rate_avg : <%= @book.average("quality").avg %>
+				<% end %>
+	    		<div class="book_description">
+	    			<h4>Gioi thieu sach</h4>
+	    			<pre>
+	    				<%= @book.description %>
+	    			</pre>
+	    		</div>
+	    	</div>
+	    </div>
+	    <% if signed_in? %>
+	    	Rate for user  <%= rating_for @book, 'quality', disable_after_rate: false, enable_half: true %>
+	    <% else %>
+	    	<div>
+	    		Rate for user  <%= rating_for @book, 'quality', disable_after_rate: false, enable_half: true %>
+	    			<div>
+	    				<a class="rate" href="<%= sign_in_path %>" data-no-turbolink></a>
+	    			</div>
+	    	</div>
+	    <% end %>
+	    <div class="row book_comment">
+	    	<h3>Review</h3>
+	    	<div class="text-right">
+	    		<% if signed_in? %>
+		    		<%= form_for(@review, remote: true) do |f| %>
+						<div class="field">
+							<%= f.text_area :content, placeholder: "Review ...", id: 'review_content', class: "full_width" %>
+							<div><%= hidden_field_tag :book_id, @book.id %></div>
+						</div>
+						<%= f.submit "Reivew", class: "btn btn-success" %>
+					<% end %>
+				<% end %>
+	    	</div>
+	    	<ul class="list_comment">
+			    <% if @book.reviews.any? %>
+			        <%= render @reviews %>
+			      	<%= will_paginate @reviews %>
+			    <% end %>
+	    	</ul>
+	    </div>
+	</div>
+<% end %>
+
+<% content_for :add_js do %>
+	<script type="text/javascript">
+
+	</script>
+	<script>
+	$(document).ready(function(){
+	    $(".rate").click(function(){
+	        var r = confirm("You must login!");
+	        if (r) {
+	            return true;
+	        } else {
+	            return false;
+	        } 
+	    });
+	});
+	</script>
+<% end %>
+
+<% extends_layout "front_end/layouts/master" %>

@@ -1,0 +1,66 @@
+<% provide(:title, "Kimi no hon | Home") %>
+
+<% content_for :add_css do %>
+	<!-- <link rel="stylesheet" type="text/css" href="/css/swiper.min.css"> -->
+<% end %>
+
+<% content_for :front_end_main do %>
+	<%= render 'front_end/menu' %>
+	<div class="col-sm-9" id="index_main_content">
+	    <div class="row">
+	    	<div class="col-sm-12 row_title_container">
+	    		<div class="row_title">
+		    		
+		    		<div class="clearfix"></div>
+	    		</div>
+	    	</div>
+	    	<div class="col-sm-3 col-xs-6">
+	    		<img src="https://c1.staticflickr.com/3/2603/4052609672_32321061de.jpg" class="full_width">
+	    	</div>
+	    	<div class="col-sm-3 col-xs-6">
+	    		<img src="https://c1.staticflickr.com/3/2603/4052609672_32321061de.jpg" class="full_width">
+	    	</div>
+	    	<div class="col-sm-3 col-xs-6">
+	    		<img src="https://c1.staticflickr.com/3/2603/4052609672_32321061de.jpg" class="full_width">
+	    	</div>
+	    	<div class="col-sm-3 col-xs-6">
+	    		<img src="https://c1.staticflickr.com/3/2603/4052609672_32321061de.jpg" class="full_width">
+	    	</div>
+	    </div>
+	    <% if @newest_books.count > 0 %>
+		    <div class="row">
+		    	<div class="col-sm-12 row_title_container">
+		    		<div class="row_title">
+			    		<h3 class="pull-left">Sách mới nhất</h3>
+			    		<a href="<%= books_path %>" class="text-right pull-right">
+			    			<u><i class="fa fa-hand-o-right"></i> Xem thêm</u>
+		    			</a>
+			    		<div class="clearfix"></div>
+		    		</div>
+		    	</div>
+		    	<% @newest_books.each do |book| %>
+			    	<div class="col-sm-3 col-xs-6">
+			    		<a href="<%= book_path(book.slug) %>">
+				    		<img src="<%= book.img_path.url %>" class="full_width">
+				    		<h5><%= book.title %></h5>
+			    		</a>
+			    	</div>
+		    	<% end %>
+		    </div>
+	    <% end %>
+	</div>
+<% end %>
+
+<% content_for :add_js do %>
+	<!-- <script type="text/javascript" src="/js/swiper.jquery.min.js"></script>
+	<script type="text/javascript">
+		var swiper = new Swiper('.swiper-container', {
+	        slidesPerView: 4,
+	        nextButton: '.swiper-button-next',
+	        prevButton: '.swiper-button-prev',
+	        spaceBetween: 20
+	    });
+	</script> -->
+<% end %>
+
+<% extends_layout "front_end/layouts/master" %>

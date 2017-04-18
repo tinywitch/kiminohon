@@ -1,0 +1,75 @@
+<% provide(:title, "HTube | Admin") %>
+
+<% content_for :back_end_main do %>
+	<div class="right_col" role="main">
+ 
+	    <div class="">
+	        <div class="page-title">
+	            <div class="title_left">
+	                <h3>
+	                    <a href="<%= admin_books_path %>"><u>Books</u></a> 
+	                    <a href="<%= new_admin_book_path %>" class="btn btn-xs btn-success"><strong>+</strong> Add new</a>
+	                </h3>
+	            </div>
+	        </div>
+	        <div class="clearfix"></div>
+	 
+	        <div class="row">
+	            <div class="col-sm-12">
+	                <%= yield %>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+<% end %>
+<% content_for :add_js do %>
+	<script type="text/javascript">
+	    $(document).ready(function () {
+	    	//DataTable
+	    	$('#list-item').DataTable();
+	    	$(".select2").select2();
+	    	
+	    	<% if flash[:error] %>
+				new PNotify({
+	              	title: 'Error',
+	              	text: '<%= flash[:error] %>',
+	              	type: 'error',
+	              	hide: false,
+	              	styling: 'bootstrap3'
+	          	});
+          	<% end %>
+	    	<% if flash[:success] %>
+				new PNotify({
+	              	title: 'Success',
+	              	text: '<%= flash[:success] %>',
+	              	type: 'success',
+	              	delay: 3000,
+	              	styling: 'bootstrap3'
+	          	});
+          	<% end %>
+	    })
+
+	    /* Change images before upload */
+		$('#book_img_path').on('change',function(){
+	        readURL(this,'.book_img'); 
+	    })
+	    function readURL(input,selector) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	            reader.onload = function (theFile) {
+	                var image = new Image();
+	                image.src = theFile.target.result;
+	                image.onload = function() {
+	                    $(selector).attr('src', this.src);
+	             
+	                };
+	            }
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+	    /* END change image*/
+	    
+	</script>
+<% end %>
+
+<% extends_layout "admin/layouts/master" %>

@@ -1,0 +1,80 @@
+<% provide(:title, "HTube | Users") %>
+
+<% content_for :back_end_main do %>
+	<div class="right_col" role="main">
+ 
+	    <div class="">
+	        <div class="page-title">
+	            <div class="title_left">
+	                <h3>Users</h3>
+	            </div>
+	        </div>
+	        <div class="clearfix"></div>
+	 
+	        <div class="row">
+	            <div class="col-sm-12">
+	                <div class="x_panel">
+	                    <div class="x_title">
+	                        <h2>All users</h2>
+	                        <ul class="nav navbar-right panel_toolbox">
+	                            <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+	                        </ul>
+	                        <div class="clearfix"></div>
+	                    </div>
+	                    <div class="x_content">
+	                        <!-- content starts here -->
+	                        <table class="table table-striped" id="list-item" cellspacing="0" width="100%">
+						        <thead>
+						            <tr>
+						                <th>Username</th>
+						                <th>Full name</th>
+						                <th>Email</th>
+						                <th>Address</th>
+						                <th>Role</th>
+						                <th width="140px">Created Time</th>
+						            </tr>
+						        </thead>
+						        <tfoot>
+						            <tr>
+						                <th>Username</th>
+						                <th>Full name</th>
+						                <th>Email</th>
+						                <th>Address</th>
+						                <th>Role</th>
+						                <th>Created Time</th>
+						            </tr>
+						        </tfoot>
+						        <tbody style="text-transform: capitalize;">
+						        <% @users.each do |user| %>
+						            <tr>
+						                <td><a href="<%= admin_user_path(user) %>" class="text-success">
+						                	<u><%= user.username %></u>
+						                </a></td>
+						                <td><%= user.fullname %></td>
+						                <td><%= user.email %></td>
+						                <td><%= user.address %></td>
+						                <td><%= user.role %></td>
+						                <td><%= user.created_at %></td>
+						            </tr>
+						        <% end %>
+						        </tbody>
+						    </table>
+	                        <!-- content ends here -->
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+<% end %>
+
+<% content_for :add_js do %>
+	<script type="text/javascript">
+	    $(document).ready(function () {
+	    	//DataTable
+	    	$('#list-item').DataTable();
+	    })
+	</script>
+<% end %>
+
+<% extends_layout "admin/layouts/master" %>

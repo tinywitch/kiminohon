@@ -1,0 +1,101 @@
+
+<div class="x_panel">
+    <div class="x_title">
+        <h2>Add new</h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content" id="book_content">
+        <!-- content starts here -->
+        <%= form_for [:admin, @book], html:{'class' => '', 'data-parsley-validate' => ''} do |f| %>
+	    	<div class="row">
+	    		<div class="col-sm-3">
+		    		<div class="form-group img_preview">
+			    		<label for="book_img">Bookjacket</label>
+			    		<div class="img">
+					        <img src="<%= image_path("chuyenketrangnghe.jpg") %>" class="full_width book_img img-thumbnail">
+				        	<button type="button" class="btn btn-default"><i class="fa fa-pencil-square-o"></i></button>
+			        	</div>
+				    </div>
+		        </div>
+	    		<div class="col-sm-9">
+	    			<div class="form-group">
+					    <label for="book_title">Title</label>
+					    <%= f.text_field :title, class: 'form-control', placeholder: 'Title', required: 'required' %>
+					</div>
+	    			<div class="form-group">
+					    <label for="book_author">Athor</label>
+					    <%= f.text_field :author, class: 'form-control', placeholder: 'Author', required: 'required' %>
+					</div>
+	    			<div class="form-group">
+	    				<div class="row">
+		    				<div class="col-sm-6">
+							    <label for="book_author">Categories</label>
+						        <select class="form-control select2 select2-hidden-accessible" name="categories[]" multiple data-placeholder="Select category" style="width: 100%;" tabindex="-1" aria-hidden="true">
+						          	<% @categories.each do |category| %>
+						            	<option value="<%= category.id %>"><%= category.category %></option>
+						          	<% end %>
+						        </select>
+					    	</div>
+		    				<div class="col-sm-6">
+							    <label for="book_author">Tags</label>
+							    <select class="form-control select2 select2-hidden-accessible" name="tags[]" multiple data-placeholder="Select tag" style="width: 100%;" tabindex="-1" aria-hidden="true">
+						          	<% @tags.each do |tag| %>
+						            	<option value="<%= tag.id %>"><%= tag.tag_name %></option>
+						          	<% end %>
+						        </select>
+					    	</div>
+	    				</div>
+					</div>	
+	    			<div class="form-group">
+					    <label for="book_description">Description</label>
+					    <%= f.text_area :description, class: 'form-control', placeholder: 'Description', rows: '8', required: 'required' %>
+					</div>
+	    			<div class="form-group hide">
+					    <label for="book_img">Bookjacket</label>
+					    <%= f.file_field :img_path, accept: 'image/*', id: 'book_img_path'%>
+					</div>
+	    			<div class="form-group">
+	    				<button type="submit" class="btn btn-success">Create</button>
+					</div>
+	    		</div>
+	    	</div>
+		<% end %>
+        <!-- content ends here -->
+    </div>
+</div>
+
+<% content_for :add_js do %>
+	<script type="text/javascript">
+	    $(document).ready(function () {
+	    	$('.img_preview div.img').click(function(){
+	    		$('#book_img_path').click()
+	    	})
+
+	    })
+
+	    /* Change images before upload */
+		$('#book_img_path').on('change',function(){
+	        readURL(this,'.book_img'); 
+	    })
+	    function readURL(input,selector) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	            reader.onload = function (theFile) {
+	                var image = new Image();
+	                image.src = theFile.target.result;
+	                image.onload = function() {
+	                    $(selector).attr('src', this.src);
+	             
+	                };
+	            }
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+	    /* END change image*/
+	</script>
+<% end %>
+
+<% extends_layout "admin/books/master" %>

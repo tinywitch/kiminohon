@@ -1,0 +1,48 @@
+<header class="container main_header">
+	<div class="row">
+		<div class="col-sm-3 text-center">
+			<a href="/"><img src="/img/logo.png" style="display:inline-block; width: 30%"></a>
+		</div>
+		<div class="col-sm-6 search">
+			<form method="GET" action="<%= search_book_path %>">
+				<%= csrf_meta_tags %>
+				<input type="text" name="query" placeholder="Search" id="book_search">
+				<button type="submit">TÌM</button>
+			</form>
+		</div>
+		<div class="col-sm-3 login">
+			<div class="pull-left" style="margin-right:20px">
+				<img src="/img/avatar-s.png" width="40">
+			</div>
+			<div style="padding-top:11px" class="pull-left">
+				<% if signed_in? %>
+					<div class="dropdown">
+						<a id="dLabel" class="text-capitalize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+						    Hello <%= current_user.username %>
+						    <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="dLabel">
+						    <li><a href="<%= profile_user_path %>" class="text-capitalize">Trang cá nhân</a></li>
+						    <% if current_user.is_admin? %>
+						    	<li><a href="<%= admin_path %>" data-no-turbolink>Bảng điều khiển</a></li>
+						    <% end %>
+						    <li><a href="<%= sign_out_path %>">Đăng xuất</a></li>
+						</ul>
+					</div>
+				<% else %>
+					<a href="<%= sign_in_path %>" data-no-turbolink>Đăng nhập</a> |
+					<a href="<%= sign_up_path %>" data-no-turbolink>Đăng ký</a>
+				<% end %>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</header>
+<div class="container-fluid" style="border-top:1px solid #ddd;border-bottom:1px solid #ddd">
+	<div class="container">
+		<ol class="breadcrumb breadcrumb_top">
+		  <li><a href="<%= root_path %>">Trang chủ</a></li>
+		  <li class="active">Data</li>
+		</ol>
+	</div>
+</div>

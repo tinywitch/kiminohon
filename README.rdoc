@@ -1,0 +1,16 @@
+== README
+
+# Open terminal and run command
+* bundle
+* rake db:migrate
+
+* Rails : 4.2.6
+* Ruby  : 2.3
+* Sqlite3
+
+# Install elasticsearch
+In this app, we use elasticsearch engine to search data. To install elasticsearch, see guidance in https://www.elastic.co/downloads/elasticsearch
+* Useage :
+- Run elasticsearch
+- Open terminal in the app and run: **rake searchkick:reindex CLASS=Book**
+- Run app: **rails s**

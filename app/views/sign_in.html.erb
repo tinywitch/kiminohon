@@ -1,0 +1,42 @@
+<% provide(:title, "HTube | Sign in") %>
+
+<% content_for :main do %>
+	<%= form_for :session, url: sign_in_path, html:{'data-parsley-validate' => ''} do |f| %>
+	  <h1>Login Form</h1>
+
+	  <% if flash[:danger] %>
+	    <div class="text-left">
+	        <ul>
+	        	<li><%= flash[:danger] %></li>
+	        </ul>
+	    </div>
+	  <% end %>
+
+	  <div>
+	  	<%= f.text_field :username, class: 'form-control', placeholder: 'Username', required: 'required' %>
+	  </div>
+	  <div>
+	  	<%= f.password_field :password, class: 'form-control', placeholder: 'Password', required: 'required' %>
+	  </div>
+	  <div class="checkbox text-left">
+	  	<label style="padding-left: 0">
+		  	<%= f.check_box :remember_me, class: 'flat' %>
+	        Remember me on this computer
+	  	</label>
+	  </div>
+	  <div class="text-center">
+	    <!-- <a class="btn btn-default submit" href="index.html">Log in</a> -->
+	    <%= f.submit 'Sign in', class: 'btn btn-success submit' %>
+	    <!-- <a class="reset_pass" href="#">Lost your password?</a> -->
+	  </div>
+	 <% end %>
+
+	  <div class="clearfix"></div>
+
+	  <div class="separator">
+	    <p class="change_link">New to site?
+	      <a href="/sign-up" class="text-primary"> <u>Create Account</u> </a>
+	    </p>
+<% end %>
+
+<% extends_layout "admin/layouts/login_layout" %>
