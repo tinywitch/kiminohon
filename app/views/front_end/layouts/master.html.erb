@@ -1,7 +1,11 @@
 
 <% content_for :add_css do %>
-	<%= stylesheet_link_tag 'nprogress' %>
-	<link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link rel="stylesheet" href="/css/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/animate.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/nexus.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/responsive.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/custom.css" rel="stylesheet">
 	<style type="text/css">
 		.tt-dropdown-menu {
 			border: 1px solid #ddd;
@@ -39,7 +43,21 @@
 <% end %>
 
 <% content_for :add_js do %>
-	<%= javascript_include_tag 'nprogress'%>
+	 <script type="text/javascript" src="/js/jquery.min.js" type="text/javascript"></script>
+            <script type="text/javascript" src="/js/bootstrap.min.js" type="text/javascript"></script>
+            <script type="text/javascript" src="/js/scripts.js"></script>
+            <!-- Isotope - Portfolio Sorting -->
+            <script type="text/javascript" src="/js/jquery.isotope.js" type="text/javascript"></script>
+            <!-- Mobile Menu - Slicknav -->
+            <script type="text/javascript" src="/js/jquery.slicknav.js" type="text/javascript"></script>
+            <!-- Animate on Scroll-->
+            <script type="text/javascript" src="/js/jquery.visible.js" charset="utf-8"></script>
+            <!-- Sticky Div -->
+            <script type="text/javascript" src="/js/jquery.sticky.js" charset="utf-8"></script>
+            <!-- Slimbox2-->
+            <script type="text/javascript" src="/js/slimbox2.js" charset="utf-8"></script>
+            <!-- Modernizr -->
+            <script src="/js/modernizr.custom.js" type="text/javascript"></script>
 	<script type="text/javascript" src="/js/front_end.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.9.3/typeahead.min.js"></script>
 	<script type="text/javascript">

@@ -1,9 +1,15 @@
-<nav class="bh_nav col-sm-3">
-	<h3>Danh muc</h3>
-	<ul>
-		<li><a href="<%= books_path %>">Tất cả đầu sách</li>
-		<% @categories.each do |category| %>
-			<li><a href="<%= category_path(category.slug) %>"><%= category.category %></a>	</li>
+<div class=" col-sm-3">
+	
+    <ul class="list-group sidebar-nav" id="sidebar-nav">
+        <li class="list-group-item">
+            <a href="<%= books_path %>">Tất cả đầu sách</a>
+        </li>
+        <% @categories.each do |category| %>
+			<li class="list-group-item"><a href="<%= category_path(category.slug) %>"><%= category.category %></a>	</li>
 		<% end %>
-	</ul>
-</nav>
+        
+    </ul>
+</div>
+
+
+

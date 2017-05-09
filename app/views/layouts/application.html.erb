@@ -1,23 +1,33 @@
+<!-- === BEGIN HEADER === -->
 <!DOCTYPE html>
-<html>
-<head>
-  	<title><%= yield :title %></title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<%= yield :add_meta %>
-
-	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-	<%= stylesheet_link_tag    'font-awesome.min' %>
-	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-	<%= csrf_meta_tags %>
-
-	<%= yield :add_css %>
-
-</head>
-<body class="<%= yield :body_class %>">
-
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <!-- Title -->
+        <title><%= yield :title %></title>
+        <!-- Meta -->
+        <%= yield :add_meta %>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <!-- Favicon -->
+        <%= csrf_meta_tags %>
+		<%= yield :add_css %>
+        <link href="favicon.ico" rel="shortcut icon">
+        
+        <!-- Google Fonts-->
+        <link href="http://fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" rel="stylesheet" type="text/css">
+    </head>
+<body class=" body-bg <%= yield :body_class %>">
+<div id="content">
+                        
 	<%= yield :content %>
+	</div
 
 	<%= yield :add_js %>
 </body>
