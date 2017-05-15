@@ -1,32 +1,18 @@
 
 <% content_for :add_css do %>
-	<%= stylesheet_link_tag 'back_end' %>
-	<%= stylesheet_link_tag 'animate' %>
-	<%= stylesheet_link_tag 'green' %>
+	<link rel="stylesheet" href="/css/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/animate.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/nexus.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/responsive.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/custom.css" rel="stylesheet">
 <% end %>
 
 <% provide(:body_class, "login") %>
 
 <% content_for :content do %>
-
 	<div>
-      <div class="login_wrapper">
-        <div class="form">
-          <section class="login_content">
-
-				<%= yield :main %>
-
-			    <div class="clearfix"></div>
-			    <br>
-
-			    <div>
-			      <h1 style="position: relative;"><a href="<%= root_url %>" data-no-turbolink><i class="fa fa-paw"></i> HTube!</a></h1>
-			      <p>©2016 All Rights Reserved. Privacy and Terms</p>
-			    </div>
-			  </div>
-          </section>
-        </div>
-      </div>
+		<%= yield :main %>
     </div>
 <% end %>
 
